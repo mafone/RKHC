@@ -10,9 +10,9 @@ Use gcc or cc to compile /Source/cipherMain32.c
 -dec -K secret_key -iv inicialization_vector -nonce one_nonce -in ciphertext.in -outplaintext.out
 
 #Authors:
-Moisés Ferreira^1
-Bernardo Sequeiros^1
-Mário Freire^1
-Aleksandra Mileva^2
-Pedro Inácio^1
+Moisés Ferreira
+Bernardo Sequeiros
+Mário Freire
+Aleksandra Mileva
+Pedro Inácio
 
