@@ -8,7 +8,7 @@ A secure variant of Hill CIpher with self nonsingular matrices generator.
 - -enc -K secret_key -iv inicialization_vector -nonce one_nonce -in plaintext.in -out ciphertext.out
 - -dec -K secret_key -iv inicialization_vector -nonce one_nonce -in ciphertext.in -outplaintext.out
 
-## Authors:
+### Authors:
 
 - Moisés Ferreira
 - Bernardo Sequeiros
