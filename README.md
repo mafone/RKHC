@@ -11,8 +11,8 @@ Run the generated output with parameters:
 - `./out -dec -K secret_key -iv inicialization_vector -nonce one_nonce -in ciphertext.in -out plaintext.out`
 
 ### Authors
-- [Moisés Ferreira]
-- [Bernardo Sequeiros]
+- [Moisés Ferreira]http://di.ubi.pt
+- [Bernardo Sequeiros]http://di.ubi.pt
 - [Mário Freire]
 - [Aleksandra Mileva]
 - [Pedro Inácio]
