@@ -14,6 +14,6 @@ Run the generated output with parameters:
 - [Moisés Ferreira](http://di.ubi.pt)
 - [Bernardo Sequeiros](http://di.ubi.pt/pessoas.php)
 - [Mário Freire](https://www.di.ubi.pt/~mario/)
-- [Aleksandra Mileva] (www.google.com)
+- [Aleksandra Mileva](www.google.com)
 - [Pedro Inácio](https://www.di.ubi.pt/~inacio/)
 
