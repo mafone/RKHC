@@ -13,7 +13,7 @@ Run the generated output with parameters:
 ### Authors
 - [Moisés Ferreira]
 - [Bernardo Sequeiros]
--[Mário Freire]
+- [Mário Freire]
 - [Aleksandra Mileva]
 - [Pedro Inácio]
 
