@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "../funcoes_matrizes.c"
+//#include "../funcoes_matrizes.c"
 
 //#include "../Header/cipher32.h"
 // The block size in bits to use in all cryptosystem
@@ -23,7 +23,7 @@ uint32_t currentSeed[16]; //The seed to be used in salsa20 in any moment
 
 // Assumes little endian
 // http://stackoverflow.com/questions/111928/is-there-a-printf-converter-to-print-in-binary-format
-// Enno Gröper
+// Enno Grï¿½per
 void printBits(size_t const size, void const * const ptr)
 {
 	unsigned char *b = (unsigned char*)ptr;

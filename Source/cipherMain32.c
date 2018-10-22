@@ -5,13 +5,11 @@
 #include <time.h>
 #include "salsa20.c"
 
-//#include "cipher32.c"
-
 #include "../Header/cipher32.h"
 
-// Command line arguments
-//-enc -K abcdef0123456789abcdef0123456789 -iv 012345678 -nonce 0123456789 -in original.jpg -out ciphertext.rhill
-//-dec -K abcdef0123456789abcdef0123456789 -iv 012345678 -nonce 0123456789 -in ciphertext.rhill -out recovered.jpg
+// Command line arguments 
+//-enc -K mykey -iv myiv -in plaintex.ext -out ciphertext.rkhc
+//-dec -K mykey -iv myiv -in ciphertext.rhill -out recovered.ext
 
 // Used to convert a string (in) into an array of uint8_t (out)
 // http://stackoverflow.com/questions/16519056/convert-ascii-char-to-hexadecimal-char-in-c
@@ -25,7 +23,8 @@ uint32_t Uint8ArrtoUint32(uint8_t* in);
 void convertKey(uint8_t keystream[64], uint32_t seed[16]);
 
 // Expand and create the seed using the key
-void createSeed(char * K, uint32_t seed[16], char * nonce);
+//void createSeed(char * K, uint32_t seed[16], char * nonce);
+void createSeed(uint32_t seed[16], size_t size, char * arg);
 
 // Fill or truncate an array to the desired size.
 // Used with the key, the iv and the nonce
@@ -37,35 +36,31 @@ void cbcEncrypt32(uint32_t * seed, char * in, char * out, char * iv);
 // Decrypting using RKHC in CBC
 void cbcDecrypt32(uint32_t * seed, char * in, char * out, char * iv);
 
-
 int main(int argc, char * argv[])
 {
-	//printf("%s\n", "It works!");
-
-	// Check the number of arguments
-	if (argc == 12)
+	if (argc == 10)
 	{
 		// Check if the parameters are valid
-		if (!(strcmp(argv[2], "-K") || strcmp(argv[4], "-iv") || strcmp(argv[6], "-nonce") || strcmp(argv[8], "-in") || strcmp(argv[10], "-out")))
+		if (!(strcmp(argv[2], "-K") || strcmp(argv[4], "-iv") || strcmp(argv[6], "-in") || strcmp(argv[8], "-out")))
 		{
-			// Randomly generate the seed
+			// Generate the seed
 			uint32_t seed[16];
-
-			createSeed(argv[3], seed, argv[7]); //The key is the seed!
+			size_t size = strlen(argv[3]); 
+			char * arg = argv[3];
+			createSeed(seed, size, arg);
 
 			// Initialize the seed
-			// TODO: THE SEED IS RESETING EVERY BLOCK - CHECK THIS
 			initializeCipher(seed);
 
 			// Encrypting in CBC
 			if (strcmp(argv[1], "-enc") == 0)
 			{
-				cbcEncrypt32(seed, argv[9], argv[11], argv[5]);
+				cbcEncrypt32(seed, argv[7], argv[9], argv[5]);
 			}
 			// Decrypting in CBC
 			else if (strcmp(argv[1], "-dec") == 0)
 			{
-				cbcDecrypt32(seed, argv[9], argv[11], argv[5]);
+				cbcDecrypt32(seed, argv[7], argv[9], argv[5]);
 			}
 			else
 			{
@@ -85,7 +80,7 @@ int main(int argc, char * argv[])
 	else
 	{
 		//fprintf(stderr, "ERROR: Wrong entry parameters!\n");
-		printf("ERROR: Wrong entry parameters!\n");
+		printf("ERROR: Wrong entry parametersMAF!\n");
 		getchar();
 		return EXIT_FAILURE;
 	}
@@ -302,6 +297,7 @@ void cbcDecrypt32(uint32_t *seed, char* in, char* out, char * iv)
 	fclose(fPlaintextFile);
 }
 
+
 // Fill or truncate an array to the desired size.
 // Used with the key, the iv and the nonce
 void fillOrTruncate(char* in, char* out, int desiredSize)
@@ -363,6 +359,23 @@ void convertKey(uint8_t keystream[64], uint32_t seed[16])
 		seed[i] = Uint8ArrtoUint32(&keystream[i * 4]);
 }
 
+void createSeed(uint32_t seed[16], size_t size, char * arg)
+{
+	if (size > 16)
+		for (int i=0; i<size; i++)
+			if (i<16)
+				seed[i]= arg[i];
+			else
+				seed[i%16] += arg[i];
+	else
+		for (int i=0; i<16; i++)
+			if (i<size)
+				seed[i]= arg[i];
+			else
+				seed[i] = arg[i%size];
+}
+
+/*
 // Expand and create the seed using the key and a (the) nounce
 // Prepared for keys of 16 and 32 bytes - changing the value of iKeySize
 void createSeed(char * K, uint32_t seed[16], char * nonce)
@@ -407,3 +420,4 @@ void createSeed(char * K, uint32_t seed[16], char * nonce)
 		convertKey(keystream, seed);
 	}
 } 
+*/
