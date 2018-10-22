@@ -1,5 +1,6 @@
 # RKHC (Randomized Key Hill Cipher)
-A secure variant of Hill Cipher with self nonsingular matrices generator.
+This repository contains an efficient method to generate nonsingular key matrices, based on the Gauss-Jordan elimina-tion procedure, which provides means to generate a new matrix per each block submitted toencryption. RKHC uses that method and adds an additional step to both the encryption and decryption algorithms to deal with messages containingpatterns (e.g., a sequence of zeros), in order to increase their strength against KPA, CPA and CCA.
+The complete work related to this code may be read [here](https://drive.google.com/open?id=12g8KHQqAHwxy_cskqIPC5AnjM7tNmzv6).
 
 ## Setup
 Compile using gcc or cc
@@ -7,8 +8,8 @@ Compile using gcc or cc
 
 ### Run (command line arguments)
 Run the generated output with parameters:
-- `./out -enc -K secret_key -iv inicialization_vector -nonce one_nonce -in plaintext.in -out ciphertext.out`
-- `./out -dec -K secret_key -iv inicialization_vector -nonce one_nonce -in ciphertext.in -out plaintext.out`
+- `./out -enc -K mykey -iv myiv -in plaintex.ext -out ciphertext.rkhc`
+- `./out -dec -K mykey -iv myiv -in ciphertext.rhill -out recovered.ext`
 
 ### Authors
 - [Moisés Ferreira](http://di.ubi.pt)
